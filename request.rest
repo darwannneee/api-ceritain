@@ -1,0 +1,38 @@
+GET  http://localhost:3000/user
+###
+
+GET  http://localhost:3000/user/1
+###
+
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "nama_user":"Aldi Taher",
+    "username": "dipangrh",
+    "password": "dipa12"
+}
+
+
+###
+PATCH  http://localhost:3000/user/1
+Content-Type: application/json
+
+{
+    "nama_user":"Darwan Updated",
+    "username": "darwanxyz",
+    "password": "darwan123"
+}
+
+###
+DELETE   http://localhost:3000/user/2
+
+###
+# Untuk Login 
+POST  http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username": "dipangrh",
+    "password": "dipa12"
+}
