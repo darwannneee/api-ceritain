@@ -6,10 +6,16 @@
         "use": "@vercel/node"
       }
     ],
+    "env": {
+        "MYSQL_HOST": "ceritain.mysql.database.azure.com",
+        "MYSQL_USER": "Ceritain",
+        "MYSQL_PASSWORD": "LombaDb@3",
+        "MYSQL_DATABASE": "ceritain"
+      },
     "routes": [
       {
         "src": "/(.*)*",
         "dest": "index.js"
       }
     ]
-  }
+}
