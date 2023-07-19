@@ -1,38 +1,48 @@
-GET  http://localhost:3000/user
+GET  http://localhost:9000/user
 ###
 
-GET  http://localhost:3000/user/1
+GET  http://localhost:9000/user/1
 ###
 
-POST http://localhost:3000/user
+POST http://localhost:9000/user
 Content-Type: application/json
 
 {
-    "nama_user":"Aldi Taher",
-    "username": "dipangrh",
-    "password": "dipa12"
+    "nama_user":"Aldi Ganteng",
+    "username": "aldi",
+    "password": "aldi123"
 }
 
 
 ###
-PATCH  http://localhost:3000/user/1
+PATCH  http://localhost:9000/user/1
 Content-Type: application/json
 
 {
-    "nama_user":"Darwan Updated",
-    "username": "darwanxyz",
+    "nama_user":"Darwan",
+    "username": "darwannneee",
     "password": "darwan123"
 }
 
 ###
-DELETE   http://localhost:3000/user/2
+DELETE   http://localhost:9000/user/2
 
 ###
 # Untuk Login 
-POST  http://localhost:3000/login
+POST  http://localhost:9000/login
 Content-Type: application/json
 
 {
+    "username": "dipangrh",
+    "password": "dipa12"
+}
+###
+
+POST  http://localhost:9000/register
+Content-Type: application/json
+
+{   
+    "nama" : "Darwan",
     "username": "dipangrh",
     "password": "dipa12"
 }

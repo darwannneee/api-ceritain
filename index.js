@@ -7,4 +7,4 @@ app.use(cors());
 app.use(express.json());
 app.use(UserRouter);
 
-app.listen(3000, () => console.log("Server Running and Up"))
+app.listen(9000, () => console.log("Server Running and Up"))

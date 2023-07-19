@@ -1,5 +1,4 @@
-import { Sequelize } from "sequelize"
-import mysql2 from 'mysql2'; // Needed to fix sequelize issues with WebPack;
+import { Sequelize } from "sequelize";
 
 const db = new Sequelize('ceritain', 'Ceritain', 'LombaDb@3', {
     host: 'ceritain.mysql.database.azure.com',
