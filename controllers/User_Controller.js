@@ -65,7 +65,7 @@ export const login = async (req, res) => {
     try {
       const user = await User.findOne({ where: { username } });
       if (user) {
-        bcrypjs.compare(password, user.password, (err, result) => {
+        bcryptjs.compare(password, user.password, (err, result) => {
           if (err) {
             console.error(err);
             res.status(500).json({ message: "Internal Server Error" });
@@ -94,7 +94,7 @@ export const login = async (req, res) => {
       // Generate salt for hashing
       const salt = await bcryptjs.genSalt(10);
       // Hash the password
-      const hashedPassword = await bcrypt.hash(password, salt);
+      const hashedPassword = await bcryptjs.hash(password, salt);
   
       // Create user with hashed password
       await User.create({
