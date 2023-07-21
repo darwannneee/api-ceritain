@@ -91,6 +91,15 @@ export const login = async (req, res) => {
     const { name, username, password } = req.body;
   
     try {
+      
+    // Cek apakah username sudah ada dalam database
+    const existingUser = await User.findOne({ username });
+
+    if (existingUser) {
+      // Jika username sudah ada, berikan respons bahwa username tidak tersedia
+      return res.status(409).json({ msg: 'Username is already taken' });
+    }
+    
       // Generate salt for hashing
       const salt = await bcryptjs.genSalt(10);
       // Hash the password
