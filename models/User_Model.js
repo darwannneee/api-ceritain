@@ -11,8 +11,7 @@ const User = db.define('user', {
     },
     nama_user: DataTypes.STRING,
     username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    imageurl:DataTypes.STRING,
+    password: DataTypes.STRING
 }, {
     freezeTableName: true
 })
