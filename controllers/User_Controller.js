@@ -93,7 +93,7 @@ export const login = async (req, res) => {
     try {
       
     // Cek apakah username sudah ada dalam database
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({  where: { username } });
 
     if (existingUser) {
       // Jika username sudah ada, berikan respons bahwa username tidak tersedia
