@@ -46,3 +46,9 @@ Content-Type: application/json
     "username": "dipangrh",
     "password": "dipa12"
 }
+
+###
+GET  http://localhost:9000/api/listDokter
+
+###
+GET  http://localhost:9000/api/jadwalDokter
