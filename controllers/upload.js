@@ -22,7 +22,7 @@ export const uploadImage = async (req, res) => {
     }
 
     const imageBuffer = req.file.buffer;
-    const imageName = 'profile' + "darwan.jpg"; // Sesuaikan dengan pola nama gambar yang Anda inginkan
+    const imageName = 'profile' + "test.jpg"; // Sesuaikan dengan pola nama gambar yang Anda inginkan
 
     // Panggil fungsi untuk mengunggah gambar ke Azure Blob Storage
     const result = await uploadImageToBlob(imageBuffer, imageName);

@@ -48,7 +48,7 @@ Content-Type: application/json
 }
 
 ###
-GET  http://localhost:9000/api/listDokter
+GET  http://localhost:9000/api/listPsikolog
 
 ###
 GET  http://localhost:9000/api/jadwalDokter

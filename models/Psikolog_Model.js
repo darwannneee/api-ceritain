@@ -3,20 +3,23 @@ import db from "../config/database.js";
 
 const {DataTypes} = Sequelize;
 
-const User = db.define('psikolog', {
-    ID_Dokter: {
+const Psikolog = db.define('psikolog', {
+    id_psikolog: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    Nama_Dokter: DataTypes.STRING,
-    Spesialisasi: DataTypes.STRING,
-    Deskripsi: DataTypes.STRING,
-    Nomor_Telepon: DataTypes.STRING,
-    Alamat: DataTypes.STRING
+    nama_psikolog: DataTypes.STRING,
+    username_psikolog: DataTypes.STRING,
+    password_psikolog: DataTypes.STRING,
+    spesialisasi: DataTypes.STRING,
+    deskripsi: DataTypes.STRING,
+    notelepon: DataTypes.STRING,
+    kota: DataTypes.STRING,
+    imageurl: DataTypes.STRING
 }, {
     freezeTableName: true
 })
 
 
-export default User;
+export default Psikolog;
