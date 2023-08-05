@@ -31,4 +31,4 @@ const JadwalPsikolog = db.define('jadwal_psikolog', {
 })
 
 
-export default User;
+export default JadwalPsikolog;
