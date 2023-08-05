@@ -1,9 +1,9 @@
 import express from "express";
-import { getJadwalDokter } from "../controllers/JadwalDokter_Controller.js"
+import { getJadwalPsikolog } from "../controllers/JadwalPsikolog.js"
 
 const router = express.Router();
 
-router.get('/api/JadwalDokter', getJadwalDokter);
+router.get('/api/JadwalDokter', getJadwalPsikolog);
 
 
 export default router;

@@ -1,5 +1,9 @@
 import User from "../models/User_Model.js";
 import bcryptjs from "bcryptjs";
+import { BlobServiceClient } from "@azure/storage-blob";
+
+const AZURE_STORAGE_CONNECTION_STRING = 'DefaultEndpointsProtocol=https;AccountName=ceritainimage;AccountKey=CV/na++9tNjMIaYJJloWSu1wukIINImEBi6nJuxQMB2pruHivDchtR40MkIvB1o5t8ZSO757QraN+AStGvm5EQ==;EndpointSuffix=core.windows.net';
+const AZURE_CONTAINER_NAME = 'dokterimage';
 
 export const getUser = async(req, res) => {
     try{
@@ -88,12 +92,12 @@ export const login = async (req, res) => {
 
 
   export const register = async (req, res) => {
-    const { name, username, password } = req.body;
+    const { name, username, password, image } = req.body;
   
     try {
       
     // Cek apakah username sudah ada dalam database
-    const existingUser = await User.findOne({  where: { username } });
+    const existingUser = await User.findOne({ where: {username} });
 
     if (existingUser) {
       // Jika username sudah ada, berikan respons bahwa username tidak tersedia
@@ -104,12 +108,29 @@ export const login = async (req, res) => {
       const salt = await bcryptjs.genSalt(10);
       // Hash the password
       const hashedPassword = await bcryptjs.hash(password, salt);
-  
+
+      let imageUrl = null;
+
+      if (image) {
+        // Upload the image to Azure Blob Storage
+        const blobServiceClient = BlobServiceClient.fromConnectionString(
+        AZURE_STORAGE_CONNECTION_STRING
+      );
+      const containerClient = blobServiceClient.getContainerClient(AZURE_CONTAINER_NAME);
+
+      const imageBuffer = Buffer.from(image, 'base64');
+      const imageName = `profile ${username}` + '.png'; // Generate a random filename
+      const blockBlobClient = containerClient.getBlockBlobClient(imageName);
+      await blockBlobClient.uploadData(imageBuffer);
+
+      imageUrl = blockBlobClient.url;
+    }
       // Create user with hashed password
       await User.create({
         nama_user: name,
         username: username,
         password: hashedPassword,
+        imageUrl: imageUrl,
       });
   
       res.status(201).json({ msg: "User Created!" });
