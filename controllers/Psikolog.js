@@ -87,7 +87,8 @@ export const registerPsikologi = async (req, res) => {
         deskripsi: deskripsi,
         notelepon: nomerTelepon,
         kota: kota,
-        imageurl: imageUrl
+        imageurl: imageUrl,
+        status: 'Available'
       });
   
       res.status(201).json({ msg: "User Created!" });
