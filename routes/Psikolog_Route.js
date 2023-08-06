@@ -1,5 +1,5 @@
 import express from "express";
-import { getPsikolog, registerPsikologi } from "../controllers/Psikolog.js"
+import { getPsikolog, loginPsikolog, registerPsikologi } from "../controllers/Psikolog.js"
 import multer from "multer";
 const router = express.Router();
 
@@ -11,6 +11,7 @@ const upload = multer({
   });
 
 router.post('/api/psikolog/createPsikolog', upload.single('image'), registerPsikologi);
+router.post('/api/psikolog/loginPsikolog', loginPsikolog);
 
 
 export default router;

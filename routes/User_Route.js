@@ -1,8 +1,9 @@
 import express from "express"
 import {getUser, getUserById, createUser, updateUser, deleteUser, login, register} from "../controllers/User_Controller.js"
-import { uploadImage } from "../controllers/upload.js";
 import multer from "multer";
+
 const router = express.Router();
+
 router.get('/user', getUser);
 router.get('/user/:id', getUserById);
 router.post('/user', createUser);
@@ -15,6 +16,4 @@ const upload = multer({
   });
 router.post("/register",upload.single('image'), register); // Menambahkan rute untuk registrasi
 
-
-router.post('/api/upload', upload.single('image'), uploadImage);
 export default router;

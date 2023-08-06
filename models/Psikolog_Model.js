@@ -16,7 +16,8 @@ const Psikolog = db.define('psikolog', {
     deskripsi: DataTypes.STRING,
     notelepon: DataTypes.STRING,
     kota: DataTypes.STRING,
-    imageurl: DataTypes.STRING
+    imageurl: DataTypes.STRING,
+    status: DataTypes.STRING
 }, {
     freezeTableName: true
 })
