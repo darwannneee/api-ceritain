@@ -1,30 +1,27 @@
-import { Sequelize } from "sequelize";
+import { Sequelize, DataTypes } from "sequelize";
 import db from "../config/database.js";
 
-const {DataTypes} = Sequelize;
 
-const JadwalPsikolog = db.define('jadwal_psikolog', {
-    ID_Jadwal: {
+const JadwalPsikolog = db.define('jadwalpsikolog', {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      ID_Dokter: {
+      id_psikolog: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      Jam_Praktik: {
+      tanggal: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      jam: {
         type: DataTypes.TIME,
         allowNull: false,
       },
-      Hari: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      Status: {
-        type: DataTypes.ENUM('Tersedia', 'Penuh'),
-        allowNull: false,
-        defaultValue: 'Tersedia',
+      available: {
+        type: DataTypes.BOOLEAN,
       },
 }, {
     freezeTableName: true
