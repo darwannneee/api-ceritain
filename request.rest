@@ -52,3 +52,6 @@ GET  http://localhost:9000/api/listPsikolog
 
 ###
 GET  http://localhost:9000/api/JadwalPsikolog
+
+###
+GET  http://localhost:9000/api/listJanjiTemu

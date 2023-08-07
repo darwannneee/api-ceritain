@@ -1,5 +1,5 @@
 import express from "express";
-import { getPsikolog, loginPsikolog, registerPsikologi } from "../controllers/Psikolog.js"
+import { getPsikolog, loginPsikolog, registerPsikologi } from "../controllers/Psikolog_Controller.js"
 import multer from "multer";
 const router = express.Router();
 
