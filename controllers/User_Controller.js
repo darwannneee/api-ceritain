@@ -1,9 +1,12 @@
 import User from "../models/User_Model.js";
 import bcryptjs from "bcryptjs";
+import {AZURE_CONTAINER_NAME, AZURE_STORAGE_CONNECTION_STRING} from "../config/storage.js";
 import { BlobServiceClient } from "@azure/storage-blob";
 
-const AZURE_STORAGE_CONNECTION_STRING = 'DefaultEndpointsProtocol=https;AccountName=ceritainimage;AccountKey=CV/na++9tNjMIaYJJloWSu1wukIINImEBi6nJuxQMB2pruHivDchtR40MkIvB1o5t8ZSO757QraN+AStGvm5EQ==;EndpointSuffix=core.windows.net';
-const AZURE_CONTAINER_NAME = 'dokterimage';
+const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
+const containerClient = blobServiceClient.getContainerClient(AZURE_CONTAINER_NAME);
+
+
 
 export const getUser = async(req, res) => {
     try{
@@ -92,7 +95,7 @@ export const login = async (req, res) => {
 
 
   export const register = async (req, res) => {
-    const { name, username, password, image } = req.body;
+    const { name, username, password } = req.body;
   
     try {
       
@@ -111,20 +114,18 @@ export const login = async (req, res) => {
 
       let imageUrl = null;
 
-      if (image) {
-        // Upload the image to Azure Blob Storage
-        const blobServiceClient = BlobServiceClient.fromConnectionString(
-        AZURE_STORAGE_CONNECTION_STRING
-      );
-      const containerClient = blobServiceClient.getContainerClient(AZURE_CONTAINER_NAME);
+      // Cek Jika udah Upload Poto apa belom
+      if (!req.file) {
+        return res.status(400).json({ error: 'Please upload a photo.' });
+      }
 
-      const imageBuffer = Buffer.from(image, 'base64');
-      const imageName = `profile ${username}` + '.png'; // Generate a random filename
-      const blockBlobClient = containerClient.getBlockBlobClient(imageName);
-      await blockBlobClient.uploadData(imageBuffer);
+      // Upload Photo ke Blob Azure
+      const blobName = `${Date.now()}-${req.file.originalname}`;
+      const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+      await blockBlobClient.uploadData(req.file.buffer, req.file.buffer.length);
+
 
       imageUrl = blockBlobClient.url;
-    }
       // Create user with hashed password
       await User.create({
         nama_user: name,
