@@ -36,7 +36,7 @@ export const registerJanjiTemu = async (req, res) => {
   };
 
   export const sendEmail = async (req, res) => {
-    const { namaUser, emailUser, noTeleponUser, tanggalPesan, jamPesan  } = req.body;
+    const { namaPsikolog, namaUser, emailUser, noTeleponUser, tanggalPesan, jamPesan  } = req.body;
 
       try {
 
@@ -84,8 +84,8 @@ export const registerJanjiTemu = async (req, res) => {
                           <p>Pembelian kamu di Ceritain telah berhasil.</p>
                           <h3>Details Pesanan:</h3>
                           <ul>
-                              <li><strong>Nama Psikolog:</strong> XL Paket Seri C</li>
-                              <li><strong>Price:</strong> Rp. 12,000</li>
+                              <li><strong>Nama Psikolog:</strong> ${namaPsikolog}</li>
+                              <li><strong>Price:</strong> Rp. 150,000</li>
                               <li><strong>Date:</strong> ${tanggalPesan}</li>
                               <li><strong>Time:</strong> ${jamPesan}</li>
                               <li><strong>NoTelepon:</strong> ${noTeleponUser}</li>
@@ -102,7 +102,8 @@ export const registerJanjiTemu = async (req, res) => {
       });      
 
         console.log("Message sent: %s", info.messageId);
-
+        // Kirim respons sukses ke klien
+        res.status(200).send("Email sent successfully!");
       } catch {
         console.error("Error sending email:");
         res.status(500).send("An error occurred while sending the email.");
