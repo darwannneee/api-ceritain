@@ -55,3 +55,16 @@ GET  http://localhost:9000/api/JadwalPsikolog
 
 ###
 GET  http://localhost:9000/api/listJanjiTemu
+
+
+###
+POST  http://localhost:9000/api/sendEmail
+Content-Type: application/json
+
+{
+    "namaUser":"Darwan Darmawan",
+    "emailUser": "darwanchannel1@gmail.com",
+    "noTeleponUser": "083814594209",
+    "tanggalPesan": "12-98-2004",
+    "jamPesan": "09:00:00"
+}

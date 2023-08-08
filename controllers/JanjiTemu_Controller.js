@@ -1,4 +1,5 @@
 import JanjiTemu from "../models/JanjiTemu_Model.js"
+import transporter from "../config/email.js";
 
 export const getJanjiTemu = async(req, res) => {
     try{
@@ -33,3 +34,79 @@ export const registerJanjiTemu = async (req, res) => {
       res.status(500).json({ msg: "Internal Server Error" });
     }
   };
+
+  export const sendEmail = async (req, res) => {
+    const { namaUser, emailUser, noTeleponUser, tanggalPesan, jamPesan  } = req.body;
+
+      try {
+
+        const info = await transporter.sendMail({
+          from: '"Ceritain" <noreply@ceritain.xyz>',
+          to: emailUser,
+          subject: 'Your Purchase is Complete',
+          html: `
+              <html>
+              <head>
+                  <style>
+                      body {
+                          font-family: Arial, sans-serif;
+                          background-color: #f5f5f5;
+                      }
+                      .container {
+                          max-width: 600px;
+                          margin: 0 auto;
+                          padding: 20px;
+                          background-color: #ffffff;
+                          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                      }
+                      .header {
+                          background-color: #007bff;
+                          color: #ffffff;
+                          padding: 10px;
+                          text-align: center;
+                      }
+                      .content {
+                          padding: 20px;
+                      }
+                      .footer {
+                          background-color: #f0f0f0;
+                          padding: 10px;
+                          text-align: center;
+                      }
+                  </style>
+              </head>
+              <body>
+                  <div class="container">
+                      <div class="header">
+                          <h2>Congratulations, ${namaUser}!</h2>
+                      </div>
+                      <div class="content">
+                          <p>Pembelian kamu di Ceritain telah berhasil.</p>
+                          <h3>Details Pesanan:</h3>
+                          <ul>
+                              <li><strong>Nama Psikolog:</strong> XL Paket Seri C</li>
+                              <li><strong>Price:</strong> Rp. 12,000</li>
+                              <li><strong>Date:</strong> ${tanggalPesan}</li>
+                              <li><strong>Time:</strong> ${jamPesan}</li>
+                              <li><strong>NoTelepon:</strong> ${noTeleponUser}</li>
+                          </ul>
+                          <p>Thank you for being a part of our Beta Tester community!</p>
+                      </div>
+                      <div class="footer">
+                          <p>If you have any questions, please contact us at noreply@ceritain.xyz</p>
+                      </div>
+                  </div>
+              </body>
+              </html>
+          `,
+      });      
+
+        console.log("Message sent: %s", info.messageId);
+
+      } catch {
+        console.error("Error sending email:");
+        res.status(500).send("An error occurred while sending the email.");
+      }
+        
+  };
+
