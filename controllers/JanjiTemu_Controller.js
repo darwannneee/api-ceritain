@@ -25,7 +25,7 @@ export const registerJanjiTemu = async (req, res) => {
         id_jadwal: idJadwal, 
         tanggalPesan: tanggalPesan,
         jamPesan: jamPesan,
-        status: "Dikonfirmasi"
+        status: "Menunggu"
       });
   
       res.status(201).json({ msg: "User Created!" });
@@ -35,7 +35,7 @@ export const registerJanjiTemu = async (req, res) => {
     }
   };
 
-  export const sendEmail = async (req, res) => {
+export const sendEmail = async (req, res) => {
     const { namaPsikolog, namaUser, emailUser, noTeleponUser, tanggalPesan, jamPesan  } = req.body;
 
       try {
@@ -110,4 +110,35 @@ export const registerJanjiTemu = async (req, res) => {
       }
         
   };
+
+  export const setStatus = async (req, res) => {
+    const { idJanjiTemu, status  } = req.body; // Assuming you have the id of the appointment
+    
+    try {
+        let updatedStatus;
+
+        if (status == 'Menunggu') {
+            updatedStatus = 'Dikonfirmasi';
+        } else if (status == 'Dikonfirmasi') {
+            updatedStatus = 'Selesai';
+        } else {
+            // Handle other status values
+            return res.status(400).json({ message: 'Invalid status value' });
+        }
+
+    // Menggunakan Sequelize untuk melakukan update status
+    const updatedAppointment = await JanjiTemu.update(
+        { status: updatedStatus },
+        { where: { id: idJanjiTemu } }
+    );
+
+    if (updatedAppointment[0] === 0) {
+        return res.status(404).json({ message: 'Appointment not found' });
+    }
+
+    res.status(200).json({ message: 'Status updated successfully' });
+    } catch (error) {
+        return res.status(500).json({ message: 'An error occurred', error: error.message });
+    }
+};
 
