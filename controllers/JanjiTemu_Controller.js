@@ -90,10 +90,10 @@ export const sendEmail = async (req, res) => {
                               <li><strong>Time:</strong> ${jamPesan}</li>
                               <li><strong>NoTelepon:</strong> ${noTeleponUser}</li>
                           </ul>
-                          <p>Thank you for being a part of our Beta Tester community!</p>
+                          <p>Terimakasih telah Booking di Ceritain, jangan lupa untuk datang tepat Waktu!</p>
                       </div>
                       <div class="footer">
-                          <p>If you have any questions, please contact us at noreply@ceritain.xyz</p>
+                          <p>Jika ada pertanyaan, Tolong kontak kami di noreply@ceritain.xyz</p>
                       </div>
                   </div>
               </body>
